@@ -1,0 +1,18 @@
+inherit_mode:
+  merge:
+    - Exclude
+
+Layout/LineLength:
+  Exclude:
+    - config/environments/*
+    - config/initializers/*
+
+Style/Documentation:
+  Enabled: false
+
+AllCops:
+  SuggestExtensions: false
+  Exclude:
+    - db/schema.rb
+    - bin/bundle
+  NewCops: enable
