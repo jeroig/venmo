@@ -5,10 +5,10 @@ module Api
     class UserController < ApplicationController
       include Pagy::Backend
       before_action :set_user
-      before_action :set_values, only: [:payment]
 
       def payment
-        PaymentService.new(@sender, @receiver, @amount, @description).call
+        PaymentService.new(@user, payload_params).call
+        head :no_content
       end
 
       def feed
@@ -28,11 +28,8 @@ module Api
         @user = User.find(params[:id])
       end
 
-      def set_values
-        @sender      = @user
-        @receiver    = User.find(params[:friend_id])
-        @amount      = params[:amount].to_f
-        @description = params[:description].to_f
+      def payload_params
+        params.require(:payload).permit(:friend_id, :amount, :description)
       end
     end
   end
