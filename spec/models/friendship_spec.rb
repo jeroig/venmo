@@ -30,7 +30,7 @@ RSpec.describe Friendship, type: :model do
       end
 
       it 'already exists' do
-        friendship.save
+        friendship.save!
         expect { reverse_friendships }.to raise_error(ActiveRecord::RecordInvalid, /the friendship already exists/)
       end
     end

@@ -3,11 +3,11 @@
 class PaymentService
   attr_reader :sender, :receiver, :amount, :description
 
-  def initialize(sender, receiver, amount, description)
+  def initialize(sender, payload)
     @sender      = sender
-    @receiver    = receiver
-    @amount      = amount
-    @description = description
+    @receiver    = User.find(payload[:friend_id])
+    @amount      = payload[:amount]
+    @description = payload[:description]
   end
 
   def call
