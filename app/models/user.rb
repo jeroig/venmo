@@ -42,12 +42,12 @@ class User < ApplicationRecord
 
   def debit(amount)
     self.balance -= amount
-    save
+    save!
   end
 
   def credit(amount)
     self.balance += amount
-    save
+    save!
   end
 
   alias add_to_balance credit
