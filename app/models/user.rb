@@ -35,4 +35,20 @@ class User < ApplicationRecord
       (friend == self) || first_level_friends.include?(friend)
     end
   end
+
+  def my_friend?(user)
+    my_friends.include? user
+  end
+
+  def debit(amount)
+    self.balance -= amount
+    save
+  end
+
+  def credit(amount)
+    self.balance += amount
+    save
+  end
+
+  alias add_to_balance credit
 end
