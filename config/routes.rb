@@ -5,9 +5,13 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1, defaults: { format: :json } do
-      post 'user/:id/payment', to: 'users#payment', as: 'payment'
-      get  'user/:id/feed', to: 'users#feed', as: 'feed'
-      get  'user/:id/balance', to: 'users#balance', as: 'balance'
+      resources :user, only: [] do
+        member do
+          post :payment
+          get  :feed
+          get  :balance
+        end
+      end
     end
   end
 end
