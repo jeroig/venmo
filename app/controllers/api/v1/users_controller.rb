@@ -14,7 +14,7 @@ module Api
         response[:data] = payments.map { |payment| { title: payment.title } }
         render json: response.to_json
       end
-      
+
       def balance
         render json: @user.to_json(only: [:balance]), status: :ok
       end

@@ -1,5 +1,17 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: payments
+#
+#  id          :bigint           not null, primary key
+#  sender_id   :bigint           not null
+#  receiver_id :bigint           not null
+#  amount      :float
+#  description :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
 require 'rails_helper'
 
 RSpec.describe Payment, type: :model do
