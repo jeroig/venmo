@@ -55,13 +55,11 @@ RSpec.describe User, type: :model do
       it 'my friends' do
         friends_of_a = user_a.my_friends
         expect(friends_of_a).to match_array([user_b, user_c])
-        expect(friends_of_a).not_to include(user_a, user_d)
       end
 
       it 'of my friends' do
         friends_of_my_friends_a = user_a.friends_of_my_friends
         expect(friends_of_my_friends_a).to match_array([user_d])
-        expect(friends_of_my_friends_a).not_to include(user_a, user_b, user_c)
       end
     end
   end
