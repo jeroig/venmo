@@ -30,15 +30,17 @@ That is why I used the concept of service object, I had to create the `services`
 
 The instruction order comes as follows
 
-  1. Create the object `PaymentService.new(@user, payload_params)`
-  1. Execute the `call` method
-    2.1 Run validations before send payment
-    --- BEGIN TRANSACTION --
-    2.2 Guarantee money (if `sender` don't have enought money ask to bank)
-    2.3 Debit from `sender`
-    2.4 Credit from `receiver`
-    2.5 create the `payment` record
-    --- END TRANSACTION --
+  * Create the object `PaymentService.new(@user, payload_params)`
+  * Execute the `call` method
+      ```
+        1. Run validations before send payment
+        --- BEGIN TRANSACTION --
+        1. Guarantee money (if `sender` don't have enought money ask to bank)
+        1. Debit from `sender`
+        1. Credit from `receiver`
+        1. create the `payment` record
+        --- END TRANSACTION --
+      ```
 
 If everything went well, the transaction was carried out successfully, it any instruction fail inside the `transaction block`, I discard the changes and return the error.
 
