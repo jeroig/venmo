@@ -31,14 +31,14 @@ That is why I used the concept of service object, I had to create the `services`
 The instruction order comes as follows
 
   1. Create the object `PaymentService.new(@user, payload_params)`
-	1. Execute the `call` method
-	  2. Run validations before send payment
-		--- BEGIN TRANSACTION --
-		2. Guarantee money (if `sender` don't have enought money ask to bank)
-		2. Debit from `sender`
-	  2. Credit from `receiver`
-    2. create the `payment` record
-		--- END TRANSACTION --
+  1. Execute the `call` method
+    2.1 Run validations before send payment
+    --- BEGIN TRANSACTION --
+    2.2 Guarantee money (if `sender` don't have enought money ask to bank)
+    2.3 Debit from `sender`
+    2.4 Credit from `receiver`
+    2.5 create the `payment` record
+    --- END TRANSACTION --
 
 If everything went well, the transaction was carried out successfully, it any instruction fail inside the `transaction block`, I discard the changes and return the error.
 
@@ -103,7 +103,7 @@ This endpoint get the user's balance
 
 ## Entity–relationship model
 The business logic is represented with the following entity relationship diagram
-![database](info/der.png)
+![database](app/info/der.png)
 
 ## Models involved
 
@@ -173,7 +173,7 @@ For running test you must execute `bundle exec rspec`
 ## Other comments
 
 ### Manual test
-The project include in `info` folder a json file `Venmo.postman_collection.json` that can be imported into postman for manual testing, but before do that is important to execute the points mencioned in `Create and initialize Database` from this README.md
+The project include in `app/info` folder a json file `Venmo.postman_collection.json` that can be imported into postman for manual testing, but before do that is important to execute the points mencioned in `Create and initialize Database` from this README.md
 
 ### Code quality
 The system includes two gems to add quality to the code
