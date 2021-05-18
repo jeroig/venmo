@@ -16,11 +16,11 @@ ulises = User.create(email: 'ulises@rootstrap.com', nick: 'ulises', balance: 200
 raul   = User.create(email: 'raul@rootstrap.com',   nick: 'raul', balance: 100)
 
 # Friendship
-Friendship.create(user: juan, friend_id: jose)
-Friendship.create(user: juan, friend_id: pablo)
-Friendship.create(user: jose, friend_id: pablo)
-Friendship.create(user: pablo, friend_id: ulises)
-Friendship.create(user: ulises, friend_id: raul)
+Friendship.create(user: juan, friend: jose)
+Friendship.create(user: juan, friend: pablo)
+Friendship.create(user: jose, friend: pablo)
+Friendship.create(user: pablo, friend: ulises)
+Friendship.create(user: ulises, friend: raul)
 
 # Between each payment created we add a random sleep time
 # in order to avoid same created time

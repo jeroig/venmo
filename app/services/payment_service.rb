@@ -11,8 +11,7 @@ class PaymentService
   end
 
   def call
-    raise VenmoError::PaymentServiceNotFriend unless sender.my_friend?(receiver)
-    raise VenmoError::PaymentServiceDescriptionNotString unless description.is_a?(String)
+    run_validations!
 
     ActiveRecord::Base.transaction do
       guarantee_money
@@ -23,6 +22,12 @@ class PaymentService
   end
 
   private
+
+  def run_validations!
+    raise VenmoError::PaymentServiceNotFriend unless sender.my_friend?(receiver)
+    raise VenmoError::PaymentServiceDescriptionNotString unless description.is_a?(String) ||
+                                                                description.nil?
+  end
 
   def guarantee_money
     future_balance = sender.balance - amount

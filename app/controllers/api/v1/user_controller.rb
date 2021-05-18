@@ -14,7 +14,7 @@ module Api
       def feed
         pagy, payments = pagy(Payment.activity_feed(@user).by_newest)
         response = { meta: pagy_metadata(pagy), data: [] }
-        response[:data] = payments.map { |payment| { title: payment.title } }
+        response[:data] = payments.map { |payment| { id: payment.id, title: payment.title } }
         render json: response.to_json
       end
 
