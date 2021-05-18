@@ -62,6 +62,31 @@ RSpec.describe User, type: :model do
         friends_of_my_friends_a = user_a.friends_of_my_friends
         expect(friends_of_my_friends_a).to match_array([user_d])
       end
+
+      it 'of my friends' do
+        friends_of_my_friends_a = user_a.friends_of_my_friends
+        expect(friends_of_my_friends_a).to match_array([user_d])
+      end
+    end
+
+    context 'is my friend' do
+      it { expect(user_a.my_friend?(user_b)).to be_truthy }
+    end
+  end
+
+  describe 'balance' do
+    context 'transaction' do
+      it 'credit' do
+        old_balance = subject.balance
+        subject.credit(100)
+        expect(subject.balance).to eq(old_balance + 100)
+      end
+
+      it 'debit' do
+        old_balance = subject.balance
+        subject.debit(100)
+        expect(subject.balance).to eq(old_balance - 100)
+      end
     end
   end
 end

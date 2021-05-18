@@ -6,10 +6,13 @@ module Api
       include Pagy::Backend
       before_action :set_user
 
+      def payment
+        PaymentService.new(@user, payload_params).call
+        head :no_content
+      end
+
       def feed
-        # (WIP) Just for activate the endpoint, list all Payments without
-        # any condition in order to setup the pagination
-        pagy, payments = pagy(Payment.includes(:sender, :receiver))
+        pagy, payments = pagy(Payment.activity_feed(@user).by_newest)
         response = { meta: pagy_metadata(pagy), data: [] }
         response[:data] = payments.map { |payment| { title: payment.title } }
         render json: response.to_json
@@ -23,6 +26,10 @@ module Api
 
       def set_user
         @user = User.find(params[:id])
+      end
+
+      def payload_params
+        params.require(:payload).permit(:friend_id, :amount, :description)
       end
     end
   end

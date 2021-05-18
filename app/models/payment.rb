@@ -19,7 +19,15 @@ class Payment < ApplicationRecord
   validates :amount, numericality: { greater_than: 0, less_than: 1_000 }
   validates :amount, presence: true
 
+  scope :by_newest, -> { order(created_at: :desc) }
+
   def title
     "#{sender.nick} paid #{receiver.nick} on #{created_at} - #{description}"
+  end
+
+  def self.activity_feed(user)
+    users_ids = user.my_friends.pluck(:id) + user.friends_of_my_friends.pluck(:id)
+    users_ids << user.id
+    includes(:sender, :receiver).where('sender_id in (?)', users_ids)
   end
 end
