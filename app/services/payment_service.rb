@@ -6,7 +6,7 @@ class PaymentService
   def initialize(sender, payload)
     @sender      = sender
     @receiver    = User.find(payload[:friend_id])
-    @amount      = payload[:amount]
+    @amount      = payload[:amount].to_f
     @description = payload[:description]
   end
 
