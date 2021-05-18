@@ -55,7 +55,7 @@ Supposed the user who sent the request is Juan
 
   1. Get all payments sender from Juan
   1. Get all payments sender from Juan's friends (in this case I get payments to Juan if they exist)
-	1. Get all payments sender from Juan's friends of friends
+  1. Get all payments sender from Juan's friends of friends
 
 All the results must be ordered in reverse chronological, for that was created the scoped method `by_newest` in payment class.
 Also a pagination was required, this requirement was supported by [pagy](https://ddnexus.github.io/pagy/how-to.html#gsc.tab=0) gem
