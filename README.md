@@ -35,10 +35,10 @@ The instruction order comes as follows
       ```
         1. Run validations before send payment
         --- BEGIN TRANSACTION --
-        1. Guarantee money (if `sender` don't have enought money ask to bank)
-        1. Debit from `sender`
-        1. Credit from `receiver`
-        1. create the `payment` record
+        2. Guarantee money (if `sender` don't have enought money ask to bank)
+        3. Debit from `sender`
+        4. Credit from `receiver`
+        5. create the `payment` record
         --- END TRANSACTION --
       ```
 
