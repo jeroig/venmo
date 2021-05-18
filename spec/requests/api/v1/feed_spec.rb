@@ -19,8 +19,9 @@ RSpec.describe 'GET /api/v1/user/:id/feed' do
       let!(:payments) do
         create(:payment, sender: juan, receiver: jose, amount: 100, created_at: Time.zone.now)
         create(:payment, sender: jose, receiver: pablo, amount: 150, created_at: 1.minute.ago)
-        create(:payment, sender: pablo, receiver: ulises, amount: 200, created_at: 1.minute.ago)
-        create(:payment, sender: ulises, receiver: jose, amount: 300, created_at: 1.minute.ago)
+        create(:payment, sender: pablo, receiver: ulises, amount: 200, created_at: 2.minute.ago)
+        create(:payment, sender: ulises, receiver: jose, amount: 300, created_at: 3.minute.ago)
+        create(:payment, sender: jose, receiver: juan, amount: 500, created_at: 4.minute.ago)
       end
 
       it 'returns http success' do
@@ -34,7 +35,7 @@ RSpec.describe 'GET /api/v1/user/:id/feed' do
           item['title'] =~ /(.*)paid.*on\s(\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\sUTC)/
           Regexp.last_match(1).strip
         end
-        expect(users).to match_array(%w[juan jose pablo])
+        expect(users).to match_array(%w[jose jose juan pablo])
       end
 
       it 'returns correct order' do
