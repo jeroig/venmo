@@ -11,7 +11,8 @@ class PaymentService
   end
 
   def call
-    raise 'You only can send money to a friend' unless sender.my_friend?(receiver)
+    raise VenmoError::PaymentServiceNotFriend unless sender.my_friend?(receiver)
+    raise VenmoError::PaymentServiceDescriptionNotString unless description.is_a?(String)
 
     ActiveRecord::Base.transaction do
       guarantee_money
